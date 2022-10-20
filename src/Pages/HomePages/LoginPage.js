@@ -3,7 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import colors from "../../constants/colors"
-import logo from "../../assets/logo.png";
+import logo from "../../assets/full_logo.png";
 import URLs from "../../constants/URLs";
 import { ThreeDots } from 'react-loader-spinner'
 
