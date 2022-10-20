@@ -34,7 +34,7 @@ const HabitStyle = styled.div`
         color: #EBEBEB;
         margin-right: 13px;
     }
-`
+`;
 const Title = styled.h1`
     color: #666666;
     font-family: 'Lexend Deca';
@@ -43,8 +43,7 @@ font-weight: 400;
 font-size: 19.976px;
 margin-bottom: 7px;
 margin-left: 15px;
-`
-
+`;
 const Progress = styled.p`
     color: #666666;
     font-family: 'Lexend Deca';
@@ -53,5 +52,5 @@ font-weight: 400;
 font-size: 12.976px;
 line-height: 16px;
 margin-left: 15px;
-`
+`;
 

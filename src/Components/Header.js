@@ -1,11 +1,15 @@
 import styled from "styled-components";
 import name_logo from ".././assets/name_logo.png";
+import { useUserPic } from "../context/User";
 
 export default function Header(){
+
+    const { userPic } = useUserPic()
+
     return (
         <HeaderStyle>
                 <img alt="name_logo" src={name_logo}/>
-                <UserImg/>
+                <UserImg src={userPic}/>
         </HeaderStyle>
     )
 }

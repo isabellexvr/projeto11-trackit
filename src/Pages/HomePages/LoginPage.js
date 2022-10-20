@@ -5,12 +5,15 @@ import styled from "styled-components";
 import colors from "../../constants/colors"
 import logo from "../../assets/full_logo.png";
 import URLs from "../../constants/URLs";
-import { ThreeDots } from 'react-loader-spinner'
+import { ThreeDots } from 'react-loader-spinner';
+import { useUserPic } from "../../context/User"
 
 const { blue, lightBlue, grey } = colors
 const { LoginURL } = URLs
 
-export default function LoginPage() {
+export default function LoginPage({ setToken }) {
+
+    const { setUserPic } = useUserPic()
 
     const navigate = useNavigate();
 
@@ -28,7 +31,12 @@ export default function LoginPage() {
         setLoading(true)
 
         axios.post(LoginURL, form)
-            .then(() => navigate("/hoje"))
+            .then((answer) => {
+                navigate("/hoje")
+                setToken(answer.data.token)
+                setUserPic(answer.data.image)
+                console.log(answer.data)
+            })
             .catch(err => {
                 //fazer telinha pra isso
                 alert("Usuário ainda não cadastrado.")
@@ -47,9 +55,9 @@ export default function LoginPage() {
                     <FormStyle onSubmit={sendForm}>
                         <input placeholder="email" name="email" type="email" onChange={handleForm} required />
                         <input placeholder="senha" name="password" type="password" onChange={handleForm} required />
-                        <LoginButton color={blue}>Entrar</LoginButton>
+                        <LoginButton type="submit" color={blue}>Entrar</LoginButton>
                     </FormStyle>
-                    <Link to="/cadastro">Não tem uma conta? Cadastre-se!</Link>
+                    <StyledLink to="/cadastro">Não tem uma conta? Cadastre-se!</StyledLink>
                 </>
             )}
             {loading && (
@@ -71,7 +79,7 @@ export default function LoginPage() {
                             />
                         </LoginButton>
                     </FormStyle>
-                    <Link to="/cadastro">Não tem uma conta? Cadastre-se!</Link>
+                    <StyledLink to="/cadastro">Não tem uma conta? Cadastre-se!</StyledLink>
                 </>
             )}
         </HomePageStyle>
@@ -84,13 +92,14 @@ const HomePageStyle = styled.div`
     flex-direction:column;
     justify-content: center;
     align-items: center;
-a{
+`;
+
+const StyledLink = styled(Link)`
     font-family: 'Lexend Deca', sans-serif;
     font-size: 14px;
     color: ${blue};
     font-weight: 400;
-}
-`
+`;
 
 const FormStyle = styled.form`
     display: flex;

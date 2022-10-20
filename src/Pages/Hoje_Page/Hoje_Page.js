@@ -9,6 +9,7 @@ const { blue, grey, darkBlue } = colors
 
 export default function Hoje_Page() {
 
+
     const weekday = new Date().getDay()
     const monthDay = new Date().getDate()
     const month = new Date().getMonth()
@@ -31,7 +32,7 @@ const PageStyle = styled.div`
     padding-top: 98px;
     height: 155vw;
     background-color: #F2F2F2;
-`
+`;
 
 const DateStyle = styled.h1`
     color: ${darkBlue};

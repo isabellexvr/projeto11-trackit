@@ -28,12 +28,14 @@ export default function SignUpPage() {
         setLoading(true)
 
         axios.post(SignUpURL, form)
-            .then(() => alert("Sucesso!"))
-            .catch(err => console.log(err.responde.data))
-
-        console.log(form)
-
-        navigate("/");
+            .then(() => {
+                alert("Sucesso!")
+                navigate("/");
+            })
+            .catch(err => {
+                alert(err.response.data.message)
+                setLoading(false)
+            })
     };
 
     return (
@@ -46,9 +48,9 @@ export default function SignUpPage() {
                         <input placeholder="senha" name="password" type="password" onChange={handleForm} required />
                         <input placeholder="nome" name="name" type="name" onChange={handleForm} required />
                         <input placeholder="foto" name="image" type="URL" onChange={handleForm} required />
-                        <SignUpButton color={blue} >Entrar</SignUpButton>
+                        <SignUpButton type="submit" color={blue} >Entrar</SignUpButton>
                     </FormStyle>
-                    <Link to="/">Já tem uma conta? Faça login!</Link>
+                    <StyledLink to="/">Já tem uma conta? Faça login!</StyledLink>
                 </>
             )}
             {loading && (
@@ -72,7 +74,7 @@ export default function SignUpPage() {
                             />
                         </SignUpButton>
                     </FormStyle>
-                    <Link to="/">Já tem uma conta? Faça login!</Link>
+                    <StyledLink to="/">Já tem uma conta? Faça login!</StyledLink>
                 </>
             )}
         </HomePageStyle>
@@ -85,13 +87,14 @@ display: flex;
 flex-direction:column;
 justify-content: center;
 align-items: center;
-a{
+`;
+
+const StyledLink = styled(Link)`
     font-family: 'Lexend Deca', sans-serif;
     font-size: 14px;
     color: ${blue};
     font-weight: 400;
-}
-`
+`;
 
 const FormStyle = styled.form`
     display: flex;
