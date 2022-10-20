@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { FaCheckSquare } from 'react-icons/fa';
 
+//fazer aparecer somente após o login; se não estiver logado, aparecer algo (erro) para voltar à página inicial
+
 export default function Habit() {
     return (
         <HabitStyle>
