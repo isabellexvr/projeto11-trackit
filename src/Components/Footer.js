@@ -1,14 +1,30 @@
 import styled from "styled-components"
 import colors from "../constants/colors"
+import { buildStyles, CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
+import { useNavigate } from "react-router-dom";
 
-const {blue} = colors
+const { blue } = colors
 
-export default function Footer(){
+export default function Footer() {
+    const navigate = useNavigate();
+    const value = 0.66;
     return (
         <FooterStyle>
-            <h1>Hábitos</h1>
-            <HojeCircle>Hoje</HojeCircle>
-            <h1>Histórico</h1>
+            <h1 onClick={()=>navigate("/habitos")}>Hábitos</h1>
+            <HojeCircle>
+                <CircularProgressbar
+                    value={value}
+                    maxValue={1}
+                    text="Hoje"
+                    styles={buildStyles({
+                        pathColor: "rgba(255,255,255)",
+                        textSize: "18px",
+                        textColor: "#ffffff",
+                        trailColor: "#52B6FF",
+                    })} />
+            </HojeCircle>
+            <h1 onClick={()=> navigate("/historico")}>Histórico</h1>
         </FooterStyle>
     )
 }
@@ -31,13 +47,13 @@ font-weight: 400;
 font-size: 17.976px;
 color: ${blue}
     }
-`
+`;
 
 const HojeCircle = styled.div`
     border-radius: 50%;
     background-color: ${blue};
-    width: 91px;
-    height: 91px;
+    width: 90px;
+    height: 90px;
     margin-bottom: 50px;
     display: flex;
     align-items: center;
@@ -47,4 +63,4 @@ font-style: normal;
 font-weight: 400;
 font-size: 17.976px;
 color: white;
-`
+`;

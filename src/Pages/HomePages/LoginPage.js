@@ -9,20 +9,20 @@ import { ThreeDots } from 'react-loader-spinner';
 import { useUserPic } from "../../context/User";
 import ThemeContainer from "../../Components/ThemeContainer";
 import { useTheme, themes } from "../../context/Theme";
+import { useToken } from "../../context/Token";
 
 const { blue, lightBlue, grey } = colors
 const { LoginURL } = URLs
 
-export default function LoginPage({ setToken }) {
+export default function LoginPage() {
 
+    const { setToken } = useToken()
     const { setTheme, theme } = useTheme()
-
     const { setUserPic } = useUserPic()
 
     const navigate = useNavigate();
 
     const [form, setForm] = useState({})
-
     const [loading, setLoading] = useState(false)
 
     function handleForm({ target: { value, name } }) {
@@ -58,10 +58,10 @@ export default function LoginPage({ setToken }) {
                     <ThemeContainer>
                         <SwitchThemes >
                             <h1>DarkMode</h1>
-                            <input onClick={()=> {
-                                setTheme(theme.name === "dark" ? themes[1] : themes[0]) 
+                            <input onClick={() => {
+                                setTheme(theme.name === "dark" ? themes[1] : themes[0])
                                 console.log(theme)
-                                }} type="checkbox"></input>
+                            }} type="checkbox"></input>
                             <label htmlFor="darkmode-toggle">
                                 <div className="ball"></div>
                             </label>
@@ -80,25 +80,36 @@ export default function LoginPage({ setToken }) {
             )}
             {loading && (
                 <ThemeContainer>
-
-                    <img src={logo} />
-                    <FormStyle onSubmit={sendForm}>
-                        <input disabled placeholder="email" name="email" type="email" onChange={handleForm} required />
-                        <input disabled placeholder="senha" name="password" type="password" onChange={handleForm} required />
-                        <LoginButton color={lightBlue} disabled>
-                            <ThreeDots
-                                height="50"
-                                width="50"
-                                radius="9"
-                                color="white"
-                                ariaLabel="three-dots-loading"
-                                wrapperStyle={{}}
-                                wrapperClassName=""
-                                visible={true}
-                            />
-                        </LoginButton>
-                    </FormStyle>
-                    <StyledLink to="/cadastro">Não tem uma conta? Cadastre-se!</StyledLink>
+                    <SwitchThemes >
+                        <h1>DarkMode</h1>
+                        <input onClick={() => {
+                            setTheme(theme.name === "dark" ? themes[1] : themes[0])
+                            console.log(theme)
+                        }} type="checkbox"></input>
+                        <label htmlFor="darkmode-toggle">
+                            <div className="ball"></div>
+                        </label>
+                    </SwitchThemes>
+                    <PageStyleContainer>
+                        <img src={logo} />
+                        <FormStyle onSubmit={sendForm}>
+                            <input disabled placeholder="email" name="email" type="email" onChange={handleForm} required />
+                            <input disabled placeholder="senha" name="password" type="password" onChange={handleForm} required />
+                            <LoginButton color={lightBlue} disabled>
+                                <ThreeDots
+                                    height="50"
+                                    width="50"
+                                    radius="9"
+                                    color="white"
+                                    ariaLabel="three-dots-loading"
+                                    wrapperStyle={{}}
+                                    wrapperClassName=""
+                                    visible={true}
+                                />
+                            </LoginButton>
+                        </FormStyle>
+                        <StyledLink to="/cadastro">Não tem uma conta? Cadastre-se!</StyledLink>
+                    </PageStyleContainer>
                 </ThemeContainer>
             )}
         </>
@@ -161,7 +172,6 @@ input:checked + label .ball{
 
 }
 `;
-
 
 const StyledLink = styled(Link)`
     font-family: 'Lexend Deca', sans-serif;

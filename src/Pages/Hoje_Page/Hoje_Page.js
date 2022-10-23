@@ -9,7 +9,6 @@ const { blue, grey, darkBlue } = colors
 
 export default function Hoje_Page() {
 
-
     const weekday = new Date().getDay()
     const monthDay = new Date().getDate()
     const month = new Date().getMonth()
@@ -17,7 +16,7 @@ export default function Hoje_Page() {
     return (
         <PageStyle>
             <Header />
-            <DateStyle>{weekdays[weekday]}, {monthDay}/{month}</DateStyle>
+            <DateStyle>{weekdays[weekday]}, {monthDay}/{month.length >1 ?  month : "0"+month}</DateStyle>
             <HabitsNumberStyle>Nenhum hábito concluído ainda</HabitsNumberStyle>
             <Habit/>
             <Habit/>

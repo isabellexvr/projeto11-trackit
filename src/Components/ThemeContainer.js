@@ -17,6 +17,4 @@ const BackgroundTheme = styled.div`
     background-color: ${props => props.background};
     height: 150vw;
     width: 100%;
-
-
 `;

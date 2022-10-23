@@ -14,8 +14,8 @@ export default function UserPicProvider({ children }) {
         <UserContext.Provider value={{ userPic, setUserPic }}>
             {children}
         </UserContext.Provider>
-    )
-}
+    );
+};
 
 export function useUserPic() {
     const context = useContext(UserContext);
