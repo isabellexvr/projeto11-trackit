@@ -33,9 +33,8 @@ export default function Habitos_Page() {
             .catch(err => console.log(err.responde.data.message))
     }, [loading])
 
-
     return (
-        <PageStyle>
+        <PageStyle numberOfHabits={habits.length}>
             <Header />
             <TitleContainer>
                 <TitleStyle>Meus Hábitos</TitleStyle>
@@ -66,7 +65,7 @@ const TitleStyle = styled.h1`
 const PageStyle = styled.div`
     padding-top: 98px;
     padding-bottom: 34px;
-    height: 155vw;
+    height: ${props => props.numberOfHabits*145}px;
     background-color: #F2F2F2;
 `;
 

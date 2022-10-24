@@ -38,7 +38,7 @@ export default function Hoje_Page() {
     const percentage = ((completedHabits.length * 100) / todayHabits.length).toFixed(0)
 
     return (
-        <PageStyle>
+        <PageStyle numberOfHabits={todayHabits.length}>
             <Header />
             <DateStyle data-identifier="today-infos">{weekdays[weekday]}, {monthDay}/{month.length > 1 ? month : "0" + month}</DateStyle>
             {percentage <= 0 && (
@@ -72,11 +72,10 @@ export default function Hoje_Page() {
     )
 }
 
-//ajustar esse height aqui
 const PageStyle = styled.div`
     padding-top: 98px;
     margin-bottom: 35px;
-    height: 155vw;
+    height: ${props => props.numberOfHabits*135}px;
     background-color: #F2F2F2;
 `;
 

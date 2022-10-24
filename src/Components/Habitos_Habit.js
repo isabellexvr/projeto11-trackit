@@ -31,13 +31,13 @@ export default function Habitos_Habit({ habits, setLoading }) {
             )}
             {habits && (
                 habits.map((habit) =>
-                    <HabitStyle data-identifier="habit-name">
-                        <div>
+                    <HabitStyle size={habit.name.length >= 17 ? "1.5" : "1"} data-identifier="habit-name">
+                        <HabitContainer>
                             <HabitTitle>
                                 {habit.name}
                             </HabitTitle>
                             <FaTrash data-identifier="delete-habit-btn" onClick={() => deleteHabit(habit.id)} />
-                        </div>
+                        </HabitContainer>
                         <WeekDaysContainer>
                             {weekDays.map((day, i) =>
                                 <WeekDayButton selected={habit.days.includes(i)}>
@@ -52,14 +52,18 @@ export default function Habitos_Habit({ habits, setLoading }) {
     )
 }
 
+//18 => 2*91px
+
 const HabitStyle = styled.div`
     width: 340px;
-    height: 91px;
+    height: ${props => props.size * 91}px;
     background: #FFFFFF;
     border-radius: 5px;
     margin: 0 auto;
     margin-top: 20px;
-    div:first-child{
+`;
+
+const HabitContainer = styled.div`
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -67,7 +71,6 @@ const HabitStyle = styled.div`
             margin-right: 10px;
             color: #666666;
         }
-    }
 `;
 
 const HabitTitle = styled.p`
@@ -89,8 +92,8 @@ const WeekDayButton = styled.div`
     width: 30px;
     height: 30px;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     font-family: 'Lexend Deca';
     font-style: normal;
     font-weight: 400;
