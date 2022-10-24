@@ -31,12 +31,12 @@ export default function Habitos_Habit({ habits, setLoading }) {
             )}
             {habits && (
                 habits.map((habit) =>
-                    <HabitStyle>
+                    <HabitStyle data-identifier="habit-name">
                         <div>
                             <HabitTitle>
                                 {habit.name}
                             </HabitTitle>
-                            <FaTrash onClick={() => deleteHabit(habit.id)} />
+                            <FaTrash data-identifier="delete-habit-btn" onClick={() => deleteHabit(habit.id)} />
                         </div>
                         <WeekDaysContainer>
                             {weekDays.map((day, i) =>

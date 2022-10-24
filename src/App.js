@@ -5,7 +5,6 @@ import SignUpPage from "./Pages/HomePages/SignUpPage";
 import Hoje_Page from "./Pages/Hoje_Page/Hoje_Page";
 import Habitos_Page from "./Pages/Habitos_Page/Habitos_Page";
 import UserPicProvider from "./context/User";
-import ThemeProvider from "./context/Theme";
 import Historico_Page from "./Pages/Historico_Page/Historico_Page";
 import TokenProvider from "./context/Token";
 
@@ -13,8 +12,6 @@ import TokenProvider from "./context/Token";
 export default function App() {
 
   return (
-    <ThemeProvider>
-
       <TokenProvider>
 
         <UserPicProvider>
@@ -33,8 +30,6 @@ export default function App() {
         </UserPicProvider>
 
       </TokenProvider>
-
-    </ThemeProvider>
   )
 }
 

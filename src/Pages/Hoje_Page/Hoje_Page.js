@@ -40,7 +40,7 @@ export default function Hoje_Page() {
     return (
         <PageStyle>
             <Header />
-            <DateStyle>{weekdays[weekday]}, {monthDay}/{month.length > 1 ? month : "0" + month}</DateStyle>
+            <DateStyle data-identifier="today-infos">{weekdays[weekday]}, {monthDay}/{month.length > 1 ? month : "0" + month}</DateStyle>
             {percentage <= 0 && (
                 <HabitsNumberStyle color={"#BABABA"}>
                     Nenhum hábito concluído ainda
@@ -48,7 +48,7 @@ export default function Hoje_Page() {
             )}
             {percentage > 0 && (
                 <>
-                    <HabitsNumberStyle color={"#8FC549"}>
+                    <HabitsNumberStyle data-identifier="today-infos" color={"#8FC549"}>
                         {percentage}% dos hábitos concluídos
                     </HabitsNumberStyle>
                 </>
@@ -75,6 +75,7 @@ export default function Hoje_Page() {
 //ajustar esse height aqui
 const PageStyle = styled.div`
     padding-top: 98px;
+    margin-bottom: 35px;
     height: 155vw;
     background-color: #F2F2F2;
 `;

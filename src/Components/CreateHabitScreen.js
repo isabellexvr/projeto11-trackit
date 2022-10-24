@@ -58,17 +58,17 @@ export default function CreateHabitSreen({ setCreateScreen, setLoading, loading 
         <CreateHabitSreenStyle>
             {!loading && (
                 <>
-                    <input value={habitTitle} onChange={e => setHabitTitle(e.target.value)} type="text" placeholder="nome do hábito" />
+                    <input data-identifier="input-habit-name" value={habitTitle} onChange={e => setHabitTitle(e.target.value)} type="text" placeholder="nome do hábito" />
                     <div>
                         {weekDays.map((weekDay, id) =>
-                            <WeekDayButton isSelected={selectedDays.includes(id)} key={id} onClick={() => daysSelection(id)}>
+                            <WeekDayButton data-identifier="week-day-btn" isSelected={selectedDays.includes(id)} key={id} onClick={() => daysSelection(id)}>
                                 {weekDay}
                             </WeekDayButton>
                         )}
                     </div>
                     <SubmitButtons>
-                        <CancelButton onClick={() => setCreateScreen(false)}>Cancelar</CancelButton>
-                        <SaveButton color={blue} onClick={handleForm}>Salvar</SaveButton>
+                        <CancelButton data-identifier="cancel-habit-create-btn" onClick={() => setCreateScreen(false)}>Cancelar</CancelButton>
+                        <SaveButton data-identifier="save-habit-create-btn" color={blue} onClick={handleForm}>Salvar</SaveButton>
                     </SubmitButtons>
                 </>
             )}

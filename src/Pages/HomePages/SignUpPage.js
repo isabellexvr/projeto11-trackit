@@ -44,23 +44,23 @@ export default function SignUpPage() {
                 <>
                     <img src={logo} />
                     <FormStyle onSubmit={sendForm}>
-                        <input placeholder="email" name="email" type="email" onChange={handleForm} required />
-                        <input placeholder="senha" name="password" type="password" onChange={handleForm} required />
-                        <input placeholder="nome" name="name" type="name" onChange={handleForm} required />
-                        <input placeholder="foto" name="image" type="URL" onChange={handleForm} required />
+                        <input data-identifier="input-email" placeholder="email" name="email" type="email" onChange={handleForm} required />
+                        <input data-identifier="input-password" placeholder="senha" name="password" type="password" onChange={handleForm} required />
+                        <input data-identifier="input-name" placeholder="nome" name="name" type="name" onChange={handleForm} required />
+                        <input data-identifier="input-photo" placeholder="foto" name="image" type="URL" onChange={handleForm} required />
                         <SignUpButton type="submit" color={blue} >Entrar</SignUpButton>
                     </FormStyle>
-                    <StyledLink to="/">Já tem uma conta? Faça login!</StyledLink>
+                    <StyledLink data-identifier="back-to-login-action" to="/">Já tem uma conta? Faça login!</StyledLink>
                 </>
             )}
             {loading && (
                 <>
                     <img src={logo} />
                     <FormStyle onSubmit={sendForm}>
-                        <input disabled placeholder="email" name="email" type="email" onChange={handleForm} required />
-                        <input disabled placeholder="senha" name="password" type="password" onChange={handleForm} required />
-                        <input disabled placeholder="nome" name="name" type="name" onChange={handleForm} required />
-                        <input disabled placeholder="foto" name="image" type="URL" onChange={handleForm} required />
+                        <input data-identifier="input-email" disabled placeholder="email" name="email" type="email" onChange={handleForm} required />
+                        <input data-identifier="input-password" disabled placeholder="senha" name="password" type="password" onChange={handleForm} required />
+                        <input data-identifier="input-name" disabled placeholder="nome" name="name" type="name" onChange={handleForm} required />
+                        <input data-identifier="input-photo" disabled placeholder="foto" name="image" type="URL" onChange={handleForm} required />
                         <SignUpButton disabled color={lightBlue} >
                             <ThreeDots
                                 height="50"
@@ -74,7 +74,7 @@ export default function SignUpPage() {
                             />
                         </SignUpButton>
                     </FormStyle>
-                    <StyledLink to="/">Já tem uma conta? Faça login!</StyledLink>
+                    <StyledLink data-identifier="back-to-login-action" to="/" disabled>Já tem uma conta? Faça login!</StyledLink>
                 </>
             )}
         </HomePageStyle>

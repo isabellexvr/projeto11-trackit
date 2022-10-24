@@ -39,13 +39,13 @@ export default function Habitos_Page() {
             <Header />
             <TitleContainer>
                 <TitleStyle>Meus Hábitos</TitleStyle>
-                <FaPlusSquare onClick={() => createScreen ? setCreateScreen(false) : setCreateScreen(true)} />
+                <FaPlusSquare data-identifier="create-habit-btn" onClick={() => createScreen ? setCreateScreen(false) : setCreateScreen(true)} />
             </TitleContainer>
             {createScreen && (
                 <CreateHabitSreen loading={loading} setLoading={setLoading} setCreateScreen={setCreateScreen} />
             )}
             {habits.length < 1 && (
-                <EmptyWarning>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</EmptyWarning>
+                <EmptyWarning data-identifier="no-habit-message">Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</EmptyWarning>
             )}
             {habits.length > 0 && (
                 <Habitos_Habit setLoading={setLoading} habits={habits}>a</Habitos_Habit>

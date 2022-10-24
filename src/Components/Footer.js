@@ -12,7 +12,7 @@ export default function Footer() {
     return (
         <FooterStyle>
             <h1 onClick={() => navigate("/habitos")}>Hábitos</h1>
-            <HojeCircle onClick={() => navigate("/hoje")}>
+            <HojeCircle data-identifier="habit-page-action" onClick={() => navigate("/hoje")}>
                 <CircularProgressbar
                     
                     value={value}
@@ -28,7 +28,7 @@ export default function Footer() {
                 />
             </HojeCircle>
 
-            <h1 onClick={() => navigate("/historico")}>Histórico</h1>
+            <h1 data-identifier="historic-page-action" onClick={() => navigate("/historico")}>Histórico</h1>
         </FooterStyle>
     )
 }

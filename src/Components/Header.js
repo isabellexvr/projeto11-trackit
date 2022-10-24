@@ -9,7 +9,7 @@ export default function Header(){
     return (
         <HeaderStyle>
                 <img alt="name_logo" src={name_logo}/>
-                <UserImg src={userPic}/>
+                <UserImg data-identifier="avatar" src={userPic}/>
         </HeaderStyle>
     )
 }

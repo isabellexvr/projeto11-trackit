@@ -30,13 +30,14 @@ export default function Hoje_Habit({ children, habit, setCompletedHabits, comple
     }
     return (
         <>
-                <HabitStyle>
-                    {children}
-                    <FaCheckSquare
-                        color={completedHabits.includes(habit) ? "#8FC549" : "#E7E7E7"}
-                        onClick={checking}
-                    />
-                </HabitStyle>
+            <HabitStyle data-identifier="today-infos">
+                {children}
+                <FaCheckSquare
+                    data-identifier="done-habit-btn"
+                    color={completedHabits.includes(habit) ? "#8FC549" : "#E7E7E7"}
+                    onClick={checking}
+                />
+            </HabitStyle>
         </>
     )
 }
