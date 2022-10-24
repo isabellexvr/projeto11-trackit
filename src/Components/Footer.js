@@ -8,23 +8,27 @@ const { blue } = colors
 
 export default function Footer() {
     const navigate = useNavigate();
-    const value = 0.66;
+    const value = 50;
     return (
         <FooterStyle>
-            <h1 onClick={()=>navigate("/habitos")}>Hábitos</h1>
-            <HojeCircle>
+            <h1 onClick={() => navigate("/habitos")}>Hábitos</h1>
+            <HojeCircle onClick={() => navigate("/hoje")}>
                 <CircularProgressbar
+                    
                     value={value}
-                    maxValue={1}
                     text="Hoje"
+                    background
+                    backgroundPadding={6}
                     styles={buildStyles({
-                        pathColor: "rgba(255,255,255)",
-                        textSize: "18px",
-                        textColor: "#ffffff",
-                        trailColor: "#52B6FF",
-                    })} />
+                        backgroundColor: `${blue}`,
+                        textColor: "#fff",
+                        pathColor: "#fff",
+                        trailColor: "transparent"
+                    })}
+                />
             </HojeCircle>
-            <h1 onClick={()=> navigate("/historico")}>Histórico</h1>
+
+            <h1 onClick={() => navigate("/historico")}>Histórico</h1>
         </FooterStyle>
     )
 }
@@ -40,27 +44,30 @@ const FooterStyle = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-around;
+    font-family: 'Lexend Deca';
     h1 {
-        font-family: 'Lexend Deca';
-font-style: normal;
-font-weight: 400;
-font-size: 17.976px;
-color: ${blue}
+        font-style: normal;
+        font-weight: 400;
+        font-size: 17.976px;
+        color: ${blue};
+    }
+    svg {
+        width: 91px;
+        height: 91px;
+        margin-bottom: 50px;
+        font-size: 17.98px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 `;
 
 const HojeCircle = styled.div`
     border-radius: 50%;
-    background-color: ${blue};
+
     width: 90px;
     height: 90px;
     margin-bottom: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     font-family: 'Lexend Deca';
-font-style: normal;
-font-weight: 400;
-font-size: 17.976px;
-color: white;
+    font-size: 17.976px;
 `;

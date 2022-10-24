@@ -39,16 +39,12 @@ export default function LoginPage() {
                 navigate("/hoje")
                 setToken(answer.data.token)
                 setUserPic(answer.data.image)
-                console.log(answer.data)
             })
             .catch(err => {
                 //fazer telinha pra isso
                 alert("Usuário ainda não cadastrado.")
                 setLoading(false)
-                console.log(err.responde.data)
             })
-
-        console.log(form)
     }
 
     return (

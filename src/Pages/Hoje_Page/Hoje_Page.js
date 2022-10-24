@@ -3,25 +3,84 @@ import Footer from "../../Components/Footer";
 import styled from "styled-components";
 import weekdays from "../../constants/weekdays";
 import colors from "../../constants/colors";
-import Habit from "../../Components/Habit";
+import Hoje_Habit from "../../Components/Hoje_Habit";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import URLs from "../../constants/URLs";
+import { useToken } from "../../context/Token";
 
-const { blue, grey, darkBlue } = colors
+const { GetTodayHabitsURL } = URLs
+const { darkBlue } = colors
 
 export default function Hoje_Page() {
 
-    const weekday = new Date().getDay()
-    const monthDay = new Date().getDate()
-    const month = new Date().getMonth()
+    const { token } = useToken();
+
+    const weekday = new Date().getDay();
+    const monthDay = new Date().getDate();
+    const month = new Date().getMonth();
+
+    const [todayHabits, setTodayHabits] = useState([])
+    const [completedHabits, setCompletedHabits] = useState([])
+
+    useEffect(() => {
+        axios.get(GetTodayHabitsURL, {
+            headers: { "Authorization": "Bearer " + token }
+        })
+            .then(answer => {
+                setTodayHabits(answer.data)
+                console.log(answer.data)
+            })
+            .catch(err => console.log(err.response.data))
+    }, [])
+
+    const percentage = ((completedHabits.length * 100) / todayHabits.length).toFixed(0)
 
     return (
         <PageStyle>
             <Header />
-            <DateStyle>{weekdays[weekday]}, {monthDay}/{month.length >1 ?  month : "0"+month}</DateStyle>
-            <HabitsNumberStyle>Nenhum hábito concluído ainda</HabitsNumberStyle>
-            <Habit/>
-            <Habit/>
-            <Habit/>
-            <Footer/>
+            <DateStyle>{weekdays[weekday]}, {monthDay}/{month.length > 1 ? month : "0" + month}</DateStyle>
+            {percentage <= 0 && (
+                <HabitsNumberStyle color={"#BABABA"}>
+                    Nenhum hábito concluído ainda
+                </HabitsNumberStyle>
+            )}
+            {percentage > 0 && (
+                <>
+                    <HabitsNumberStyle color={"#8FC549"}>
+                        {percentage}% dos hábitos concluídos
+                    </HabitsNumberStyle>
+                </>
+            )}
+            {todayHabits && (
+                todayHabits.map((habit, i) =>
+                    <Hoje_Habit key={i} habit={habit} completedHabits={completedHabits} setCompletedHabits={setCompletedHabits}>
+                        <div>
+                            <Title>{habit.name}</Title>
+                            <Progress>
+                                Sequência atual: {habit.currentSequence} dias
+                                <br />
+                                Seu recorde: {habit.highestSequence} dias
+                            </Progress>
+                        </div>
+                    </Hoje_Habit>
+                )
+            )}
+
+            {/*             {todayHabits.map((habit, i) =>
+                <Hoje_Habit key={i} habit={habit} completedHabits={completedHabits} setCompletedHabits={setCompletedHabits}>
+                    <div>
+                        <Title>{habit.name}</Title>
+                        <Progress>
+                            Sequência atual: {habit.currentSequence} dias
+                            <br />
+                            Seu recorde: {habit.highestSequence} dias
+                        </Progress>
+                    </div>
+                </Hoje_Habit>
+            )} */}
+
+            <Footer />
         </PageStyle>
     )
 }
@@ -42,12 +101,32 @@ const DateStyle = styled.h1`
 `;
 
 const HabitsNumberStyle = styled.h2`
-    color: #BABABA;
+    color: ${props => props.color};
     font-size: 18px;
     font-weight: 400;
     font-family: 'Lexend Deca', sans-serif;
     margin-left: 17px;
-    margin-top: 6px;
-    margin-bottom: 28px;
+    margin-top: 10px;
+    margin-bottom: 26px;
+`;
 
-`
+const Title = styled.h1`
+    color: #666666;
+    font-family: 'Lexend Deca';
+font-style: normal;
+font-weight: 400;
+font-size: 19.976px;
+margin-bottom: 7px;
+margin-left: 15px;
+`;
+
+const Progress = styled.p`
+    color: #666666;
+    font-family: 'Lexend Deca';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12.976px;
+    line-height: 16px;
+    margin-left: 15px;
+`;
+
