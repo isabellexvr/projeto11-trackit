@@ -29,7 +29,8 @@ export default function Hoje_Page() {
         })
             .then(answer => {
                 setTodayHabits(answer.data)
-                console.log(answer.data)
+                const alreadyComplete = answer.data.filter(h => h.done === true)
+                setCompletedHabits(alreadyComplete)
             })
             .catch(err => console.log(err.response.data))
     }, [])
@@ -58,28 +59,14 @@ export default function Hoje_Page() {
                         <div>
                             <Title>{habit.name}</Title>
                             <Progress>
-                                Sequência atual: {habit.currentSequence} dias
+                                Sequência atual: <Sequence color={completedHabits.includes(habit) ? "#8FC549" : "#666666"}>{habit.currentSequence} dias</Sequence>
                                 <br />
-                                Seu recorde: {habit.highestSequence} dias
+                                Seu recorde: <Sequence color={((habit.highestSequence === habit.currentSequence) && (habit.highestSequence > 0) && (habit.currentSequence > 0)) ? "#8FC549" : "#666666"}>{habit.highestSequence} dias</Sequence>
                             </Progress>
                         </div>
                     </Hoje_Habit>
                 )
             )}
-
-            {/*             {todayHabits.map((habit, i) =>
-                <Hoje_Habit key={i} habit={habit} completedHabits={completedHabits} setCompletedHabits={setCompletedHabits}>
-                    <div>
-                        <Title>{habit.name}</Title>
-                        <Progress>
-                            Sequência atual: {habit.currentSequence} dias
-                            <br />
-                            Seu recorde: {habit.highestSequence} dias
-                        </Progress>
-                    </div>
-                </Hoje_Habit>
-            )} */}
-
             <Footer />
         </PageStyle>
     )
@@ -121,7 +108,7 @@ margin-left: 15px;
 `;
 
 const Progress = styled.p`
-    color: #666666;
+    color:"#666666";
     font-family: 'Lexend Deca';
     font-style: normal;
     font-weight: 400;
@@ -130,3 +117,6 @@ const Progress = styled.p`
     margin-left: 15px;
 `;
 
+const Sequence = styled.strong`
+    color: ${props => props.color};
+`;

@@ -17,15 +17,15 @@ export default function Hoje_Habit({ children, habit, setCompletedHabits, comple
             setCompletedHabits(newList)
             axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habit.id}/uncheck`
                 , habit.id, config)
-                .then((answer) => console.log(answer.data))
+                .then((answer) => console.log("deu certo!"))
                 .catch((err) => console.log(err.response.data))
         } else {
             const newList = [...completedHabits, habit]
             setCompletedHabits(newList)
             axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habit.id}/check`
                 , habit.id, config)
-                .then((answer) => console.log(answer.data))
-                .catch(err => console.log(err.response.data.message))
+                .then((answer) => console.log("tbm deu certo"))
+                .catch(err => console.log(err.response.data))
         }
     }
     return (
