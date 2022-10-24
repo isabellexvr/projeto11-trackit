@@ -1,15 +1,25 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import name_logo from ".././assets/name_logo.png";
 import { useUserPic } from "../context/User";
 
-export default function Header(){
-
+export default function Header() {
+    const navigate = useNavigate();
     const { userPic } = useUserPic()
 
     return (
         <HeaderStyle>
-                <img alt="name_logo" src={name_logo}/>
-                <UserImg data-identifier="avatar" src={userPic}/>
+            <img alt="name_logo" src={name_logo} />
+            <div>
+                <UserImg data-identifier="avatar" src={userPic} />
+                <a onClick={() => {
+                    localStorage.removeItem("data")
+                    navigate("/")
+                }}>
+                    LOGOUT
+                </a>
+            </div>
+
         </HeaderStyle>
     )
 }
@@ -25,6 +35,22 @@ const HeaderStyle = styled.div`
     justify-content: space-between;
     align-items: center;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+    div{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        box-sizing: border-box;
+        font-size: 10px;
+        color: white;
+        font-family: 'Lexend Deca';
+        font-weight: 500;
+        a {
+            border: 1px solid white;
+            border-radius: 5px;
+            padding: 1px;
+        }
+    }
     img {
         margin-left: 18px;
     }
@@ -35,4 +61,5 @@ const UserImg = styled.img`
     width: 51px;
     height: 51px;
     margin-right: 18px;
+    margin-bottom: 2px;
 `;
