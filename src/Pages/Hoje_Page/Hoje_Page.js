@@ -23,6 +23,7 @@ export default function Hoje_Page() {
 
     const [todayHabits, setTodayHabits] = useState([])
     const [completedHabits, setCompletedHabits] = useState([])
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         axios.get(GetTodayHabitsURL, {
@@ -32,6 +33,7 @@ export default function Hoje_Page() {
                 setTodayHabits(answer.data)
                 const alreadyComplete = answer.data.filter(h => h.done === true)
                 setCompletedHabits(alreadyComplete)
+                setLoading(false)
             })
             .catch(err => console.log(err.response.data))
     }, [completedHabits, todayHabits])
@@ -54,7 +56,7 @@ export default function Hoje_Page() {
                     </HabitsNumberStyle>
                 </>
             )}
-            {todayHabits.length < 1 && (
+            {loading && (
                 <LoadingContainer>
                     <ThreeDots
                         height="100"

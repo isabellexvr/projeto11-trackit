@@ -9,8 +9,8 @@ import { ThreeDots } from 'react-loader-spinner';
 import { useUserPic } from "../../context/User";
 import { useToken } from "../../context/Token";
 
-const { blue, lightBlue, grey } = colors
-const { LoginURL } = URLs
+const { blue, lightBlue, grey } = colors;
+const { LoginURL } = URLs;
 
 export default function LoginPage() {
     const navigate = useNavigate();
@@ -18,38 +18,35 @@ export default function LoginPage() {
     const { setToken } = useToken();
     const { setUserPic } = useUserPic();
 
-    const isLogged = localStorage.getItem("data")
+    const isLogged = localStorage.getItem("data");
     if (isLogged) {
-        const data = JSON.parse(isLogged)
-        setToken(data.token)
-        setUserPic(data.image)
-        navigate("/hoje")
+        const data = JSON.parse(isLogged);
+        setToken(data.token);
+        setUserPic(data.image);
+        navigate("/hoje");
     }
 
-    const [form, setForm] = useState({})
-    const [loading, setLoading] = useState(false)
+    const [form, setForm] = useState({});
+    const [loading, setLoading] = useState(false);
 
     function handleForm({ target: { value, name } }) {
-        setForm({ ...form, [name]: value, })
+        setForm({ ...form, [name]: value, });
     }
 
     function sendForm(e) {
-        e.preventDefault()
-
-        setLoading(true)
-
+        e.preventDefault();
+        setLoading(true);
         axios.post(LoginURL, form)
             .then((answer) => {
-                navigate("/hoje")
-                setToken(answer.data.token)
-                setUserPic(answer.data.image)
-                const serializado = JSON.stringify(answer.data)
-                localStorage.setItem("data", serializado)
+                navigate("/hoje");
+                setToken(answer.data.token);
+                setUserPic(answer.data.image);
+                const serializado = JSON.stringify(answer.data);
+                localStorage.setItem("data", serializado);
             })
             .catch(err => {
-                //fazer telinha pra isso
-                alert("Usuário ainda não cadastrado.")
-                setLoading(false)
+                alert("Usuário ainda não cadastrado.");
+                setLoading(false);
             })
     }
 

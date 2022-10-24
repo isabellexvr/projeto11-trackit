@@ -7,34 +7,34 @@ import URLs from "../../constants/URLs";
 import axios from "axios";
 import { ThreeDots } from 'react-loader-spinner';
 
-const { blue, lightBlue, grey } = colors
-const { SignUpURL } = URLs
+const { blue, lightBlue, grey } = colors;
+const { SignUpURL } = URLs;
 
 export default function SignUpPage() {
 
     const navigate = useNavigate();
 
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
 
     const [form, setForm] = useState({});
 
     function handleForm({ target: { value, name } }) {
-        setForm({ ...form, [name]: value, })
+        setForm({ ...form, [name]: value, });
     };
 
     function sendForm(e) {
-        e.preventDefault()
+        e.preventDefault();
 
-        setLoading(true)
+        setLoading(true);
 
         axios.post(SignUpURL, form)
             .then(() => {
-                alert("Sucesso!")
+                alert("Usuário cadastrado com sucesso!");
                 navigate("/");
             })
             .catch(err => {
-                alert(err.response.data.message)
-                setLoading(false)
+                alert(err.response.data.message);
+                setLoading(false);
             })
     };
 
@@ -82,11 +82,11 @@ export default function SignUpPage() {
 }
 
 const HomePageStyle = styled.div`
-margin-top: 68px;
-display: flex;
-flex-direction:column;
-justify-content: center;
-align-items: center;
+    margin-top: 68px;
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
 `;
 
 const StyledLink = styled(Link)`

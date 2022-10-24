@@ -20,7 +20,7 @@ export default function CreateHabitSreen({ setCreateScreen, setLoading, loading 
 
     function daysSelection(id) {
         if (selectedDays.some(d => id === d)) {
-            const newLista = selectedDays.filter(d => id + 1 !== d)
+            const newLista = selectedDays.filter(d => id !== d)
             setSelectedDays(newLista)
         } else {
             const newLista = [...selectedDays, id]
