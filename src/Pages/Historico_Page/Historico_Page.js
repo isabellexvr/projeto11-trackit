@@ -2,16 +2,18 @@ import styled from "styled-components";
 import Header from "../../Components/Header";
 import Footer from "../../Components/Footer";
 import colors from "../../constants/colors";
+import URLs from "../../constants/URLs";
 
 const { darkBlue } = colors
+const { HabitsHistoryURL } = URLs
 
-export default function Historico_Page(){
+export default function Historico_Page() {
     return (
         <PageStyle>
-        <Header/>
-        <Title>Histórico</Title>
-        <EmptyWarning>Em breve você poderá ver o histórico dos seus hábitos aqui!</EmptyWarning>
-        <Footer/>
+            <Header />
+            <Title>Histórico</Title>
+            <EmptyWarning>Em breve você poderá ver o histórico dos seus hábitos aqui!</EmptyWarning>
+            <Footer />
         </PageStyle>
     )
 }

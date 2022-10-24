@@ -29,7 +29,6 @@ export default function Habitos_Page() {
         axios.get(GetHabitsURL, config)
             .then((answer) => {
                 setHabits(answer.data)
-                console.log(answer.data)
             })
             .catch(err => console.log(err.responde.data.message))
     }, [loading])
@@ -66,6 +65,7 @@ const TitleStyle = styled.h1`
 
 const PageStyle = styled.div`
     padding-top: 98px;
+    padding-bottom: 34px;
     height: 155vw;
     background-color: #F2F2F2;
 `;

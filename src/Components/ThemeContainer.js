@@ -15,6 +15,6 @@ export default function ThemeContainer({children}){
 
 const BackgroundTheme = styled.div`
     background-color: ${props => props.background};
-    height: 150vw;
+    height: 178vw;
     width: 100%;
 `;
