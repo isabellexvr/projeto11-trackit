@@ -40,7 +40,7 @@ export default function Habitos_Habit({ habits, setLoading }) {
                         </HabitContainer>
                         <WeekDaysContainer>
                             {weekDays.map((day, i) =>
-                                <WeekDayButton selected={habit.days.includes(i)}>
+                                <WeekDayButton key={i} selected={habit.days.includes(i)}>
                                     {day}
                                 </WeekDayButton>
                             )}
