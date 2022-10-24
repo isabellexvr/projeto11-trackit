@@ -3,29 +3,31 @@ import { FaCheckSquare } from 'react-icons/fa';
 import axios from "axios";
 import { useToken } from "../context/Token";
 
-//fazer aparecer somente após o login; se não estiver logado, aparecer algo (erro) para voltar à página inicial
-
 export default function Hoje_Habit({ children, habit, setCompletedHabits, completedHabits }) {
-
     const { token } = useToken()
 
     const config = { headers: { "Authorization": `Bearer ${token}` } }
 
     function checking() {
+
         if (completedHabits.some(ch => ch === habit)) {
             const newList = completedHabits.filter(ch => habit !== ch)
             setCompletedHabits(newList)
             axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habit.id}/uncheck`
                 , habit.id, config)
-                .then((answer) => console.log("deu certo!"))
-                .catch((err) => console.log(err.response.data))
+                .then()
+                .catch((err) => {
+                    console.log(err.response.data)
+                })
         } else {
             const newList = [...completedHabits, habit]
             setCompletedHabits(newList)
             axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habit.id}/check`
                 , habit.id, config)
-                .then((answer) => console.log("tbm deu certo"))
-                .catch(err => console.log(err.response.data))
+                .then()
+                .catch( (err) => {
+                    console.log(err.response.data)
+                })
         }
     }
     return (
@@ -50,7 +52,6 @@ const HabitStyle = styled.div`
     margin: 0 auto;
     margin-bottom: 10px;
     display: flex;
-
     justify-content: space-between;
     align-items: center;
     svg {

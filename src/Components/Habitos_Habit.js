@@ -30,8 +30,8 @@ export default function Habitos_Habit({ habits, setLoading }) {
                 <div> carregando...</div>
             )}
             {habits && (
-                habits.map((habit) =>
-                    <HabitStyle size={habit.name.length >= 17 ? "1.5" : "1"} data-identifier="habit-name">
+                habits.map((habit, i) =>
+                    <HabitStyle key={i} size={habit.name.length >= 17 ? "1.5" : "1"} data-identifier="habit-name">
                         <HabitContainer>
                             <HabitTitle>
                                 {habit.name}
@@ -61,6 +61,7 @@ const HabitStyle = styled.div`
     border-radius: 5px;
     margin: 0 auto;
     margin-top: 20px;
+    margin-bottom: 30px;
 `;
 
 const HabitContainer = styled.div`

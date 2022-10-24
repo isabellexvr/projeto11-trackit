@@ -8,9 +8,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import URLs from "../../constants/URLs";
 import { useToken } from "../../context/Token";
+import { ThreeDots } from 'react-loader-spinner';
 
 const { GetTodayHabitsURL } = URLs
-const { darkBlue } = colors
+const { darkBlue, blue } = colors
 
 export default function Hoje_Page() {
 
@@ -18,7 +19,7 @@ export default function Hoje_Page() {
 
     const weekday = new Date().getDay();
     const monthDay = new Date().getDate();
-    const month = new Date().getMonth();
+    const month = (new Date().getMonth()) + 1;
 
     const [todayHabits, setTodayHabits] = useState([])
     const [completedHabits, setCompletedHabits] = useState([])
@@ -33,15 +34,15 @@ export default function Hoje_Page() {
                 setCompletedHabits(alreadyComplete)
             })
             .catch(err => console.log(err.response.data))
-    }, [])
+    }, [completedHabits, todayHabits])
 
     const percentage = ((completedHabits.length * 100) / todayHabits.length).toFixed(0)
 
     return (
         <PageStyle numberOfHabits={todayHabits.length}>
             <Header />
-            <DateStyle data-identifier="today-infos">{weekdays[weekday]}, {monthDay}/{month.length > 1 ? month : "0" + month}</DateStyle>
-            {percentage <= 0 && (
+            <DateStyle data-identifier="today-infos">{weekdays[weekday]}, {monthDay}/{month >= 10 ? month : "0" + month}</DateStyle>
+            {(percentage <= 0 || todayHabits.length < 1) && (
                 <HabitsNumberStyle color={"#BABABA"}>
                     Nenhum hábito concluído ainda
                 </HabitsNumberStyle>
@@ -52,6 +53,21 @@ export default function Hoje_Page() {
                         {percentage}% dos hábitos concluídos
                     </HabitsNumberStyle>
                 </>
+            )}
+            {todayHabits.length < 1 && (
+                <LoadingContainer>
+                    <ThreeDots
+                        height="100"
+                        width="100"
+                        radius="9"
+                        color={blue}
+                        ariaLabel="three-dots-loading"
+                        wrapperStyle={{}}
+                        wrapperClassName=""
+                        visible={true}
+                    />
+                <HabitsNumberStyle color={darkBlue}>Carregando...</HabitsNumberStyle>
+                </LoadingContainer>
             )}
             {todayHabits && (
                 todayHabits.map((habit, i) =>
@@ -74,8 +90,9 @@ export default function Hoje_Page() {
 
 const PageStyle = styled.div`
     padding-top: 98px;
+    padding-bottom: 30px;
     margin-bottom: 35px;
-    height: ${props => props.numberOfHabits*135}px;
+    height: 150vw;
     background-color: #F2F2F2;
 `;
 
@@ -119,4 +136,16 @@ const Progress = styled.p`
 
 const Sequence = styled.strong`
     color: ${props => props.color};
+`;
+
+const LoadingContainer = styled.div`
+    h2 {
+        font-size: 23px;
+        margin-bottom: 5px;
+    }
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
 `;

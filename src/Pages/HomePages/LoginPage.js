@@ -13,11 +13,18 @@ const { blue, lightBlue, grey } = colors
 const { LoginURL } = URLs
 
 export default function LoginPage() {
-
-    const { setToken } = useToken()
-    const { setUserPic } = useUserPic()
-
     const navigate = useNavigate();
+
+    const { setToken } = useToken();
+    const { setUserPic } = useUserPic();
+
+    const isLogged = localStorage.getItem("data")
+    if (isLogged) {
+        const data = JSON.parse(isLogged)
+        setToken(data.token)
+        setUserPic(data.image)
+        navigate("/hoje")
+    }
 
     const [form, setForm] = useState({})
     const [loading, setLoading] = useState(false)
@@ -36,6 +43,8 @@ export default function LoginPage() {
                 navigate("/hoje")
                 setToken(answer.data.token)
                 setUserPic(answer.data.image)
+                const serializado = JSON.stringify(answer.data)
+                localStorage.setItem("data", serializado)
             })
             .catch(err => {
                 //fazer telinha pra isso

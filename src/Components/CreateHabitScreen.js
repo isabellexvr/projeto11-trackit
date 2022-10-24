@@ -22,31 +22,27 @@ export default function CreateHabitSreen({ setCreateScreen, setLoading, loading 
         if (selectedDays.some(d => id === d)) {
             const newLista = selectedDays.filter(d => id + 1 !== d)
             setSelectedDays(newLista)
-            console.log(newLista)
         } else {
             const newLista = [...selectedDays, id]
             setSelectedDays(newLista)
-            console.log(newLista)
         }
     }
 
     function handleForm() {
         setLoading(true)
         if (selectedDays.length > 0 && habitTitle.length >= 3) {
-            console.log(selectedDays)
             const config = {
                 headers: { "Authorization": "Bearer " + token }
             }
-            axios.post(CreateHabitURL,{name: habitTitle,days: selectedDays},config)
-                .then(answer => {
+            axios.post(CreateHabitURL, { name: habitTitle, days: selectedDays }, config)
+                .then(() => {
                     setLoading(false)
                     setCreateScreen(false)
                     setHabitTitle("")
                     setSelectedDays([])
                 })
-                .catch(err => {
+                .catch(() => {
                     setLoading(false)
-                    alert("aaa")
                 })
         } else {
             alert("Insira um nome válido (3 caracteres ou mais) e selecione ao menos UM dia da semana.")
@@ -161,30 +157,26 @@ const SubmitButtons = styled.div`
 
 const CancelButton = styled.button`
     width: 84px;
-height: 35px;
-background-color: white;
-color: ${blue};
-font-family: 'Lexend Deca';
-font-style: normal;
-font-weight: 400;
-font-size: 15.976px;
-border: none;
-border-radius: 4.63636px;
+    height: 35px;
+    background-color: white;
+    color: ${blue};
+    font-family: 'Lexend Deca';
+    font-size: 15.976px;
+    border: none;
+    border-radius: 4.63636px;
 `;
 
 const SaveButton = styled.button`
-width: 84px;
-height: 35px;
-background-color: ${props => props.color};
-color: white;
-font-family: 'Lexend Deca';
-font-style: normal;
-font-weight: 400;
-font-size: 15.976px;
-border: none;
-border-radius: 4.63636px;
-margin-left: 6px;
-display: flex;
-justify-content: center;
-align-items: center;
+    width: 84px;
+    height: 35px;
+    background-color: ${props => props.color};
+    color: white;
+    font-family: 'Lexend Deca';
+    font-size: 15.976px;
+    border: none;
+    border-radius: 4.63636px;
+    margin-left: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
