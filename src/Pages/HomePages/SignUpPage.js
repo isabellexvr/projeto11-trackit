@@ -42,20 +42,20 @@ export default function SignUpPage() {
         <HomePageStyle>
             {!loading && (
                 <>
-                    <img src={logo} />
+                    <img alt="logo" src={logo} />
                     <FormStyle onSubmit={sendForm}>
                         <input data-identifier="input-email" placeholder="email" name="email" type="email" onChange={handleForm} required />
                         <input data-identifier="input-password" placeholder="senha" name="password" type="password" onChange={handleForm} required />
                         <input data-identifier="input-name" placeholder="nome" name="name" type="name" onChange={handleForm} required />
                         <input data-identifier="input-photo" placeholder="foto" name="image" type="URL" onChange={handleForm} required />
-                        <SignUpButton type="submit" color={blue} >Entrar</SignUpButton>
+                        <SignUpButton type="submit" color={blue} >Cadastrar-se</SignUpButton>
                     </FormStyle>
                     <StyledLink data-identifier="back-to-login-action" to="/">Já tem uma conta? Faça login!</StyledLink>
                 </>
             )}
             {loading && (
                 <>
-                    <img src={logo} />
+                    <img alt="logo" src={logo} />
                     <FormStyle onSubmit={sendForm}>
                         <input data-identifier="input-email" disabled placeholder="email" name="email" type="email" onChange={handleForm} required />
                         <input data-identifier="input-password" disabled placeholder="senha" name="password" type="password" onChange={handleForm} required />

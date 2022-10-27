@@ -16,22 +16,20 @@ const { GetHabitsURL } = URLs
 export default function Habitos_Page() {
     const { token } = useToken()
 
-    const config = {
-        headers: { "Authorization": "Bearer " + token }
-    }
-
     const [createScreen, setCreateScreen] = useState(false);
 
     const [habits, setHabits] = useState([]);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        axios.get(GetHabitsURL, config)
+        axios.get(GetHabitsURL, {
+            headers: { "Authorization": "Bearer " + token }
+        })
             .then((answer) => {
                 setHabits(answer.data)
             })
-            .catch(err => console.log(err.responde.data.message))
-    }, [loading])
+            .catch(err => console.log(err.response.data.message))
+    }, [token, createScreen, loading])
 
     return (
         <PageStyle numberOfHabits={habits.length}>
@@ -54,7 +52,7 @@ export default function Habitos_Page() {
                 <EmptyWarning data-identifier="no-habit-message">Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</EmptyWarning>
             )}
             {habits.length > 0 && (
-                <Habitos_Habit habits={habits} />
+                <Habitos_Habit setLoading={setLoading} habits={habits} />
             )}
             <Footer />
         </PageStyle>

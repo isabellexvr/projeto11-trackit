@@ -22,14 +22,17 @@ export default function CreateHabitSreen({ setCreateScreen, setLoading, loading 
         if (selectedDays.some(d => id === d)) {
             const newLista = selectedDays.filter(d => id !== d)
             setSelectedDays(newLista)
+            console.log(newLista)
         } else {
             const newLista = [...selectedDays, id]
             setSelectedDays(newLista)
+            console.log(newLista)
         }
     }
 
     function handleForm() {
         setLoading(true)
+        console.log(selectedDays)
         if (selectedDays.length > 0 && habitTitle.length >= 3) {
             const config = {
                 headers: { "Authorization": "Bearer " + token }
