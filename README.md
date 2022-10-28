@@ -10,6 +10,9 @@
 
 ### Como acesso?
  Você pode acessá-lo por aqui 😊: [TrackIt](projeto11-trackit-two-alpha.vercel.app)
+ 
+### Ei, mas como ele foi feito?
 
-
-
+![alt text](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB "React Icon")
+![alt text](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white "React Router Icon")
+![alt text](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white "Styled Components")
