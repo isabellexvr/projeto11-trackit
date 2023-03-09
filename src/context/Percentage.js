@@ -4,7 +4,7 @@ const PercentageContext = createContext();
 
 export default function PercentageProvider({ children }) {
 
-    const [percentage, setPercentage] = useState(null)
+    const [percentage, setPercentage] = useState(0)
 
     return (
         <PercentageContext.Provider value={{ percentage, setPercentage }}>

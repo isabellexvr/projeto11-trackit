@@ -46,9 +46,8 @@ const HeaderStyle = styled.div`
         font-family: 'Lexend Deca';
         font-weight: 500;
         a {
-            border: 1px solid white;
-            border-radius: 5px;
-            padding: 1px;
+            font-weight: 800;
+            font-size: 12px;
         }
     }
     img {

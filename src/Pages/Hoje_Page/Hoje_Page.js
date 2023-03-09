@@ -23,7 +23,7 @@ export default function Hoje_Page() {
     const monthDay = new Date().getDate();
     const month = (new Date().getMonth()) + 1;
 
-    const [todayHabits, setTodayHabits] = useState([])
+    const [todayHabits, setTodayHabits] = useState(null)
     const [completedHabits, setCompletedHabits] = useState([])
     const [loading, setLoading] = useState(true)
 
@@ -35,22 +35,22 @@ export default function Hoje_Page() {
                 setTodayHabits(answer.data)
                 const alreadyComplete = answer.data.filter(h => h.done === true)
                 setCompletedHabits(alreadyComplete)
-                setPercentage(((completedHabits.length * 100) / todayHabits.length).toFixed(0))
+                setPercentage(((completedHabits.length * 100) / todayHabits?.length).toFixed(0))
                 setLoading(false)
             })
-            .catch(err => console.log(err.response.data))
+            .catch(err => console.log(err))
     }, [loading, percentage])
 
     return (
-        <PageStyle numberOfHabits={todayHabits.length}>
+        <PageStyle >
             <Header />
             <DateStyle data-identifier="today-infos">{weekdays[weekday]}, {monthDay}/{month >= 10 ? month : "0" + month}</DateStyle>
-            {(percentage <= 0 || todayHabits.length < 1) && (
+            {((percentage <= 0 || !todayHabits) && !loading) && (
                 <HabitsNumberStyle color={"#BABABA"}>
                     Nenhum hábito concluído ainda
                 </HabitsNumberStyle>
             )}
-            {percentage > 0 && (
+            {( !loading && todayHabits) && (
                 <>
                     <HabitsNumberStyle data-identifier="today-infos" color={"#8FC549"}>
                         {percentage}% dos hábitos concluídos
