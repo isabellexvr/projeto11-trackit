@@ -50,7 +50,7 @@ export default function Hoje_Page() {
     <PageStyle>
       <Header />
       <DateStyle data-identifier="today-infos">
-        {weekdays[weekday]}, {monthDay}/{month >= 10 ? month : "0" + month}
+        {weekdays[weekday]}, {monthDay >= 10 ? monthDay : "0" + monthDay}/{month >= 10 ? month : "0" + month}
       </DateStyle>
       {(percentage <= 0 || !todayHabits) && !loading && (
         <HabitsNumberStyle color={"#BABABA"}>
