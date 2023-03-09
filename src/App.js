@@ -7,15 +7,13 @@ import Habitos_Page from "./Pages/Habitos_Page/Habitos_Page";
 import UserPicProvider from "./context/User";
 import Historico_Page from "./Pages/Historico_Page/Historico_Page";
 import TokenProvider from "./context/Token";
-
+import PercentageProvider from "./context/Percentage";
 
 export default function App() {
-
   return (
-      <TokenProvider>
-
-        <UserPicProvider>
-
+    <TokenProvider>
+      <UserPicProvider>
+        <PercentageProvider>
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<LoginPage />} />
@@ -26,10 +24,8 @@ export default function App() {
             </Routes>
             <GlobalStyle />
           </BrowserRouter>
-
-        </UserPicProvider>
-
-      </TokenProvider>
-  )
+        </PercentageProvider>
+      </UserPicProvider>
+    </TokenProvider>
+  );
 }
-

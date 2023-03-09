@@ -3,19 +3,20 @@ import colors from "../constants/colors"
 import { buildStyles, CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { useNavigate } from "react-router-dom";
+import { usePercentage } from "../context/Percentage";
 
 const { blue } = colors
 
 export default function Footer() {
     const navigate = useNavigate();
-    const value = 50;
+    const { percentage }  = usePercentage();
     return (
         <FooterStyle>
             <h1 onClick={() => navigate("/habitos")}>Hábitos</h1>
             <HojeCircle data-identifier="habit-page-action" onClick={() => navigate("/hoje")}>
                 <CircularProgressbar
                     
-                    value={value}
+                    value={percentage}
                     text="Hoje"
                     background
                     backgroundPadding={6}

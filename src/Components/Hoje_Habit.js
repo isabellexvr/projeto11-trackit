@@ -3,28 +3,32 @@ import { FaCheckSquare } from 'react-icons/fa';
 import axios from "axios";
 import { useToken } from "../context/Token";
 
-export default function Hoje_Habit({ children, habit, setCompletedHabits, completedHabits }) {
+export default function Hoje_Habit({ children, habit, setCompletedHabits, completedHabits, setLoading }) {
     const { token } = useToken()
 
     const config = { headers: { "Authorization": `Bearer ${token}` } }
 
-    function checking() {
-
+   async function checking() {
+        setLoading(true)
         if (completedHabits.some(ch => ch === habit)) {
             const newList = completedHabits.filter(ch => habit !== ch)
             setCompletedHabits(newList)
-            axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habit.id}/uncheck`
+            await axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habit.id}/uncheck`
                 , habit.id, config)
-                .then()
+                .then(() => {
+                    setLoading(false)
+                })
                 .catch((err) => {
                     console.log(err.response.data)
                 })
         } else {
             const newList = [...completedHabits, habit]
             setCompletedHabits(newList)
-            axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habit.id}/check`
+            await axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habit.id}/check`
                 , habit.id, config)
-                .then()
+                .then(() => {
+                    setLoading(false)
+                })
                 .catch( (err) => {
                     console.log(err.response.data)
                 })

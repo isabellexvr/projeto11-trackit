@@ -2,8 +2,6 @@ import React, { createContext, useState, useContext } from "react";
 
 const UserContext = createContext();
 
-
-
 //UserContext.provider é a nuvemzinha que armazena as info que serão passadas para todos os filhos
 
 export default function UserPicProvider({ children }) {

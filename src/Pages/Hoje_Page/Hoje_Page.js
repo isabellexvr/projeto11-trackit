@@ -9,6 +9,7 @@ import axios from "axios";
 import URLs from "../../constants/URLs";
 import { useToken } from "../../context/Token";
 import { ThreeDots } from 'react-loader-spinner';
+import { usePercentage } from "../../context/Percentage";
 
 const { GetTodayHabitsURL } = URLs
 const { darkBlue, blue } = colors
@@ -16,6 +17,7 @@ const { darkBlue, blue } = colors
 export default function Hoje_Page() {
 
     const { token } = useToken();
+    const { percentage, setPercentage } = usePercentage();
 
     const weekday = new Date().getDay();
     const monthDay = new Date().getDate();
@@ -33,12 +35,11 @@ export default function Hoje_Page() {
                 setTodayHabits(answer.data)
                 const alreadyComplete = answer.data.filter(h => h.done === true)
                 setCompletedHabits(alreadyComplete)
+                setPercentage(((completedHabits.length * 100) / todayHabits.length).toFixed(0))
                 setLoading(false)
             })
             .catch(err => console.log(err.response.data))
-    }, [completedHabits, todayHabits])
-
-    const percentage = ((completedHabits.length * 100) / todayHabits.length).toFixed(0)
+    }, [loading, percentage])
 
     return (
         <PageStyle numberOfHabits={todayHabits.length}>
@@ -71,9 +72,9 @@ export default function Hoje_Page() {
                 <HabitsNumberStyle color={darkBlue}>Carregando...</HabitsNumberStyle>
                 </LoadingContainer>
             )}
-            {todayHabits && (
+            {(todayHabits && !loading) && (
                 todayHabits.map((habit, i) =>
-                    <Hoje_Habit key={i} habit={habit} completedHabits={completedHabits} setCompletedHabits={setCompletedHabits}>
+                    <Hoje_Habit key={i} habit={habit} completedHabits={completedHabits} setCompletedHabits={setCompletedHabits} setLoading={setLoading}>
                         <div>
                             <Title>{habit.name}</Title>
                             <Progress>
