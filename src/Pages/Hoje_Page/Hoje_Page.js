@@ -57,7 +57,7 @@ export default function Hoje_Page() {
           Nenhum hábito concluído ainda
         </HabitsNumberStyle>
       )}
-      {!loading && todayHabits && (
+      {(!loading && todayHabits && percentage > 0) && (
         <>
           <HabitsNumberStyle data-identifier="today-infos" color={"#8FC549"}>
             {percentage}% dos hábitos concluídos
