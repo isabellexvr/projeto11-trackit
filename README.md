@@ -22,7 +22,7 @@
 
 <div align="left">
 <h2>Link para Demo:</h2>
-Clique aqui para acessar => <a href="http//projeto11-trackit-two-alpha.vercel.app">TrackIt</a>
+Clique aqui para acessar => <a href="http://projeto11-trackit-two-alpha.vercel.app">TrackIt</a>
 </div>
 
 <div align="left">
